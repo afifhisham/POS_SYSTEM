@@ -73,3 +73,21 @@ try {
      
 * What a function returns
      - This function will return boolean true if there's an error.
+
+2) Function runExample()
+
+```javascript
+function runExample() {
+     createDbAndTables();
+     getAllTables(getResult);
+     getAllTablesFromDB(getResultSetFromTable);
+     }
+```
+* What a function do
+     - This function is used to call another functions
+     
+* What the function's parameters or arguments are
+     - This function has no parameter
+     
+* What a function returns
+     - This function has no return value.
