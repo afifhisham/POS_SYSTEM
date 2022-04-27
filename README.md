@@ -693,6 +693,7 @@ function processResult(tblname,results) {
 
 * This is how Web SQL looks like:
 	- Web SQL database
+	![](gitImg/dbs.png )
 
 
 	- Table category
@@ -705,6 +706,7 @@ function processResult(tblname,results) {
 	![](gitImg/itemdb.png )
 	
 	- Last date console
+	![](gitImg/csl.png )
 
 	
 ### How to Use?
