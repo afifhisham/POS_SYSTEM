@@ -6,6 +6,7 @@
 This project is aiming to create a database in Web SQL for POS System. It is including the tables creation, data insertion, and retrieve the value from tables stored in Web SQL. In this project, the data that have been inserted into tables in Web SQL is the exported data from SQL file of the database in PhpMyAdmin. Another purpose of this project is to compare the last entered data into table based on the datetime in Web SQL. 
 
 ### Build Status
+This project has been completed. There is an issue found in this project where the table need to be dropped first before insert a new data. Otherwise, the new data is not inserted into table. Therefore, each time this project in run in browser, it will drop the table first then create the table.
 
 ### Installation
 To access this project, the software programs need to be installed:
@@ -35,6 +36,49 @@ Fistly, you need to create the database and tables in PhpMyAdmin, then insert th
      ![](gitImg/2022-04-27%20(4).png)
      
 ### Code Style
+
+* Comments
+	-The comments is used to be the top or the side of the line of codes with // (double slash)
+```php
+define("HOST", "localhost");     // The host you want to connect to.
+efine("USER", "root");    // The database username.
+```
+```php
+//table
+function processResultSet(tblname,results) {
+//some line of codes
+}
+```
+* Variables initialization - Variables have been initialized before the performed codes, in this case all the variables have been declared before the code of the opendatabase
+```javascript
+var db;
+var latest;
+var shortName='POSMart';
+var version='0.1';
+var displayName='POSMart';
+var maxSize = 65536;
+db = openDatabase(shortName,version,displayName,maxSize);
+```
+* Code formatting and whitespace - Ensure that whitespace makes keywords easy to read. For example:
+	- Use "} else {" rather than "}else{".
+	```javascript
+	  }
+            else {
+                var i = supplier.length - 1;
+                supplierDate = results.rows[i].SYNCD;
+		.
+		.
+		. 
+		}	
+	```
+	- Place whitespace around the outside of grouping punctuation: use "if (condition) statement;" rather than "if(condition)statement;".
+	```javascript
+	for (var i = 0; i < length; i++) {
+	```
+	- a space after // that starts a comment is placed
+	```javascript
+	 // This function here is used to write out any errors.
+	```
 
 ### Code Example
 * Create a PHP file named connection.php. This file use to connect the database.
