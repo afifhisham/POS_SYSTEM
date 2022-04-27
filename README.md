@@ -56,3 +56,20 @@ try {
 
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
+     
+### API documentation
+1) Function errorHandler
+  ```javascript
+  function errorHandler(transaction, error) {
+            console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
+            return true;}
+  ```
+  
+* What a function do
+     - This function is used to write out any errors and it will console the error message.
+     
+* What the function's parameters or arguments are
+     - **transaction** and **error** are the parameters for this function.
+     
+* What a function returns
+     - This function will return boolean true if there's an error.
