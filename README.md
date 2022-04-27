@@ -58,6 +58,75 @@ try {
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
      
 ### Code documentation
+**1) Require_once("connection.php)**
+```php
+<?php
+require_once("connection.php");
+?>
+```
+* This code is used to require the PHP file where the code of database connection as shown in **Example/ Tutorial** section is saved. This code allowed the other PHP file to use the same database connection.
+
+**2) HTML**
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web SQL</title>
+    <style>
+        body{
+
+        }
+        table,tr,th,td{
+            border-collapse:collapse;
+            border: 1px solid black;
+
+        }
+        th{
+            background-color: cadetblue;
+            justify-content: center;
+        }
+        td,tr{
+            background-color: lightgrey;
+        }
+    </style>
+
+```
+* This HTML code is used to define HTML tag and the css <style> tag is used to design the the HTML table.
+
+     
+3)Fetch data from database in PHPMyAdmin
+     
+```php
+     <?php
+        //fetch category
+        $query = "SELECT * FROM category";
+        $rs=$dbx->query($query);
+        $category[] = "";
+        while($dt=$rs->fetch()){
+            $category[] = $dt;
+        }
+        //fetch item
+        $query = "SELECT * FROM item";
+        $rs=$dbx->query($query);
+        $item[] = "";
+        while($dt=$rs->fetch()){
+            $item[] = $dt;
+        }
+        //print_r($category);
+
+        //fetch supplier
+        $query = "SELECT * FROM supplier";
+        $rs=$dbx->query($query);
+        $supplier[] = "";
+        while($dt=$rs->fetch()){
+            $supplier[] = $dt;
+        }
+        ?>
+```
+* This php codes is used to fetch all the data from database in PHPMyAdmin and store the data in arrays.
+     
 1) Function errorHandler
   ```javascript
   function errorHandler(transaction, error) {
@@ -75,10 +144,10 @@ try {
      - This function will return boolean true if there's an error.
 
 
-2) Function runExample()
+2) Function runFunction()
 
 ```javascript
-function runExample() {
+function runFunction() {
     //some lines of codes
      }
 ```
@@ -92,10 +161,10 @@ function runExample() {
      - This function has no return value.
  
  
-3. Function createDbAndTables(callback)
+3. Function createTablesAndInsert(callback)
 
 ```javascript
-function createDbAndTables(callback) {
+function createTablesAndInsert(callback) {
        //some lines of codes
 }// end createDB fx
 ```
