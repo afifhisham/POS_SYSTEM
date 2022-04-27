@@ -684,11 +684,9 @@ function processResult(tblname,results) {
 
 ### Screenshots
 
+### How to Use?
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
-     
-### Tech/Framework used
-### How to Use?
 ### Contribute
 ### Credits
 ### License
