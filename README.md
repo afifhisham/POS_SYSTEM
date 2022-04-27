@@ -15,3 +15,15 @@ Fistly, you need to create the database and tables in PhpMyAdmin, then insert th
 1. Open PHPMyAdmin (http://localhost/phpmyadmin)
 2. Create a database with name kedairuncitsl
      ![](gitImg/createDB.png)
+3. Create tables with table name **category**, **supplier**, and **item**.
+     * Table: category
+     
+     ![](gitImg/2022-04-27%20(7).png)
+     
+     * Table: supplier
+     
+     ![](gitImg/2022-04-27%20(8).png)
+     
+     * Table: item
+     
+     ![](gitImg/2022-04-27%20(4).png)
