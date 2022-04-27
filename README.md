@@ -1,1 +1,6 @@
-# POS_SYSTEM
+# Project title: POS Web SQL
+
+
+### Introduction
+
+This project kkk
