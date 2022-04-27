@@ -57,7 +57,7 @@ try {
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
      
-### API documentation
+### Code documentation
 1) Function errorHandler
   ```javascript
   function errorHandler(transaction, error) {
