@@ -58,7 +58,7 @@ try {
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
      
 ### Code documentation
-**1) Require_once("connection.php)**
+1) Require_once("connection.php)
 ```php
 <?php
 require_once("connection.php");
@@ -66,7 +66,7 @@ require_once("connection.php");
 ```
 * This code is used to require the PHP file where the code of database connection as shown in **Example/ Tutorial** section is saved. This code allowed the other PHP file to use the same database connection.
 
-**2) HTML**
+2) HTML
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -153,7 +153,7 @@ require_once("connection.php");
      - This function will return boolean true if there's an error.
 
 6) Fetch data from columns in table from PHPMyAdmin and into arrays
-  ```php
+```php
       //fetch from column in table category and put as array
       var category = [
             <?php
@@ -215,10 +215,11 @@ require_once("connection.php");
             }
             ?>
         ];
-      ```
-* This code is used to get all data stored in columns of the tables from PHPMyAdmin database and make it as arrays.     
+ ```
+ * This code is used to get all data stored in columns of the tables from PHPMyAdmin database and make it as arrays.     
 
 7) Create Web SQL database      
+      
 ```javascript
      var db;
         var latest;
@@ -227,7 +228,7 @@ require_once("connection.php");
         var displayName='POSMart';
         var maxSize = 65536;
         db = openDatabase(shortName,version,displayName,maxSize);
-      ```
+```
 * This code is used to create a Web SQL database      
       
       
@@ -337,7 +338,7 @@ function createTablesAndInsert(callback) {
 * What a function returns
      - This function has no return value.
  
- 4. Function getAllTablesFromDB()
+10) Function getAllTablesFromDB()
  ```javascript
    function getAllTablesFromDB(callback) {
             db.transaction(function(tx) {
