@@ -96,7 +96,7 @@ require_once("connection.php");
 * This HTML code is used to define HTML tag and the css <style> tag is used to design the the HTML table.
 
      
-3)Fetch data from database in PHPMyAdmin
+3) Fetch data from database in PHPMyAdmin
      
 ```php
      <?php
@@ -114,8 +114,7 @@ require_once("connection.php");
         while($dt=$rs->fetch()){
             $item[] = $dt;
         }
-        //print_r($category);
-
+      
         //fetch supplier
         $query = "SELECT * FROM supplier";
         $rs=$dbx->query($query);
@@ -126,12 +125,22 @@ require_once("connection.php");
         ?>
 ```
 * This php codes is used to fetch all the data from database in PHPMyAdmin and store the data in arrays.
-     
-1) Function errorHandler
+
+4) Variables declarations
+ ```javascript
+ <script>
+        var catDate="";
+        var itemDate="";
+        var supplierDate="";
+```
+* This code is used to declare the variables. In this case all variables above are declared as an empty string.
+      
+5) Function errorHandler
   ```javascript
   function errorHandler(transaction, error) {
-     //some lines of codes
-           }
+            console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
+            return true;
+        }
   ```
   
 * What a function do
@@ -143,12 +152,95 @@ require_once("connection.php");
 * What a function returns
      - This function will return boolean true if there's an error.
 
+6) Fetch data from columns in table from PHPMyAdmin and into arrays
+  ```php
+      //fetch from column in table category and put as array
+      var category = [
+            <?php
+            $i=0;
+            foreach($category as $cat){
+                if(!empty($cat)) {
+                    echo($i > 0 ? "," : "");
+                    echo "{
+                                'code':'" . $cat['CAT_CODE'] . "',
+                                'name':'" . $cat['CAT_NAME'] . "',
+                                'desc' :'" . $cat['CAT_DESC'] . "',
+                                'syncd' :'" . $cat['SYNCD'] . "'
+                                }";
+                    $i++;
+                }
+            }
+            ?>
+        ];
 
-2) Function runFunction()
+
+        //fetch from column in table item and put as array
+        var item = [
+            <?php
+            $i=0;
+            foreach($item as $itm){
+                if(!empty($itm)) {
+                    echo($i > 0 ? "," : "");
+                    echo "{
+                                'itemcode':'" . $itm['ITEM_CODE'] . "',
+                                'itemname':'" . $itm['ITEM_NAME'] . "',
+                                'itemprice' :'" . $itm['ITEM_PRICE'] . "',
+                                'itemimage' :'" . $itm['ITEM_IMAGE'] . "',
+                                'supplierComp' :'" . $itm['SUPP_COMPANY'] . "',
+                                'cateName' :'" . $itm['CATEGORY_NAME'] . "',
+                                'syncd' :'" . $itm['SYNCD'] . "'
+                                }";
+                    $i++;
+                }
+            }
+            ?>
+        ];
+
+        //fetch from column in table supplier and put as array
+        var supplier = [
+            <?php
+            $i=0;
+            foreach($supplier as $supp){
+                if(!empty($supp)) {
+                    echo($i > 0 ? "," : "");
+                    echo "{
+                                'semail':'" . $supp['SUPP_EMAIL'] . "',
+                                'sname':'" . $supp['SUPP_NAME'] . "',
+                                'saddress' :'" . $supp['SUPP_ADDRESS'] . "',
+                                'scompany' :'" . $supp['SUPP_COMPANY'] . "',
+                                'sphone' :'" . $supp['SUPP_PHONE'] . "',
+                                'scontact' :'" . $supp['SUPP_CONTACT'] . "',
+                                 'syncd' :'" . $supp['SYNCD'] . "'
+                                }";
+                    $i++;
+                }
+            }
+            ?>
+        ];
+      
+      ```
+* This code is used to get all data stored in columns of the tables from PHPMyAdmin database and make it as arrays.     
+
+7) Create Web SQL database      
+```javascript
+     var db;
+        var latest;
+        var shortName='POSMart';
+        var version='0.1';
+        var displayName='POSMart';
+        var maxSize = 65536;
+        db = openDatabase(shortName,version,displayName,maxSize);  
+```
+* This code is used to create a Web SQL database      
+      
+      
+8) Function runFunction()
 
 ```javascript
 function runFunction() {
-    //some lines of codes
+    createTablesAndInsert();
+            getAllTables(getResult);
+            getAllTablesFromDB(getResultSetFromTable);
      }
 ```
 * What a function do
@@ -161,12 +253,83 @@ function runFunction() {
      - This function has no return value.
  
  
-3. Function createTablesAndInsert(callback)
+9) Function createTablesAndInsert(callback)
 
 ```javascript
 function createTablesAndInsert(callback) {
-       //some lines of codes
-}// end createDB fx
+            db.transaction(function(transaction) {
+                transaction.executeSql('DROP TABLE category',null,function(){console.log('Drop Succeeded');},function(){console.log('Drop Failed');});
+                transaction.executeSql(
+                    'CREATE TABLE IF NOT EXISTS category ' +
+                    ' (CAT_CODE VARCHAR(20) NOT NULL PRIMARY KEY, ' +
+                    ' CAT_NAME VARCHAR(30) DEFAULT NULL, CAT_DESC VARCHAR(256) DEFAULT NULL,'+
+                    ' SYNCA varchar(50) DEFAULT NULL, SYNCB varchar(50) DEFAULT NULL, SYNCD datetime DEFAULT CURRENT_TIMESTAMP,' +
+                    ' SYNMA varchar(50) DEFAULT NULL, SYNMB varchar(50) DEFAULT NULL, SYNMD datetime DEFAULT NULL);'
+                );
+
+                transaction.executeSql('DROP TABLE supplier',null,function(){console.log('Drop Succeeded');},function(){console.log('Drop Failed');});
+
+                transaction.executeSql(
+                    'CREATE TABLE IF NOT EXISTS supplier ' +
+                    ' (SUPP_EMAIL VARCHAR(30) NOT NULL PRIMARY KEY, ' +
+                    ' SUPP_NAME VARCHAR(30) DEFAULT NULL, SUPP_ADDRESS VARCHAR(100) DEFAULT NULL,' +
+                    ' SUPP_COMPANY VARCHAR(30) DEFAULT NULL, SUPP_PHONE VARCHAR(15) DEFAULT NULL,' +
+                    ' SUPP_CONTACT VARCHAR(15) DEFAULT NULL,' +
+                    ' SYNCA varchar(50) DEFAULT NULL, SYNCB varchar(50) DEFAULT NULL, SYNCD datetime DEFAULT CURRENT_TIMESTAMP,' +
+                    ' SYNMA varchar(50) DEFAULT NULL, SYNMB varchar(50) DEFAULT NULL, SYNMD datetime DEFAULT NULL);'
+                );
+
+                transaction.executeSql('DROP TABLE item',null,function(){console.log('Drop Succeeded');},function(){console.log('Drop Failed');});
+
+                transaction.executeSql(
+                    'CREATE TABLE IF NOT EXISTS item ' +
+                    ' (ITEM_CODE VARCHAR(20) NOT NULL PRIMARY KEY, ' +
+                    ' ITEM_NAME VARCHAR(20) DEFAULT NULL, ITEM_IMAGE LONGBLOB DEFAULT NULL,' +
+                    ' ITEM_PRICE DOUBLE DEFAULT NULL, SUPP_COMPANY VARCHAR(30) DEFAULT NULL,' +
+                    ' CATEGORY_NAME VARCHAR(20) DEFAULT NULL,' +
+                    ' SYNCA varchar(50) DEFAULT NULL, SYNCB varchar(50) DEFAULT NULL, SYNCD datetime DEFAULT CURRENT_TIMESTAMP,' +
+                    ' SYNMA varchar(50) DEFAULT NULL, SYNMB varchar(50) DEFAULT NULL, SYNMD datetime DEFAULT NULL);'
+                );
+
+                db.transaction(
+                    function(transaction) {
+                        for (var i = 0; i < category.length; i++) {
+                            console.log('Attempting to insert ' + category[i]["code"] + category[i]["name"] + 'and' +  category[i]["name"]);
+                            transaction.executeSql(
+                                'INSERT INTO category (CAT_CODE, CAT_NAME, CAT_DESC, SYNCD) VALUES (?,?,?,?);',
+                                [category[i]["code"], category[i]["name"], category[i]["desc"],category[i]["syncd"]],
+                                null,
+                                errorHandler
+
+                            );
+
+                        }
+
+                        for (var i = 0; i < supplier.length; i++) {
+                            console.log('Attempting to insert ' + supplier[i]["semail"] + ',' + supplier[i]["sname"] + ',' + supplier[i]["saddress"] + ',' + supplier[i]["scompany"] + ',' + supplier[i]["sphone"] + ' and ' + supplier[i]["scontact"]);
+                            transaction.executeSql(
+                                'INSERT INTO supplier (SUPP_EMAIL, SUPP_NAME, SUPP_ADDRESS, SUPP_COMPANY,SUPP_PHONE, SUPP_CONTACT, SYNCD) VALUES (?,?,?,?,?,?,?);',
+                                [supplier[i]["semail"], supplier[i]["sname"],supplier[i]["saddress"],supplier[i]["scompany"],supplier[i]["sphone"],supplier[i]["scontact"],supplier[i]["syncd"]],
+                                null,
+                                errorHandler
+                            );
+                        }
+
+                        for (var i = 0; i < item.length; i++) {
+                            console.log('Attempting to insert ' + item[i]["itemcode"] + ',' + item[i]["itemname"] + ',' + item[i]["itemprice"] + ',' + item[i]["itemimage"] +   ',' + item[i]["supplierComp"] + ' and ' + item[i]["cateName"]);
+                            transaction.executeSql(
+                                'INSERT INTO item (ITEM_CODE, ITEM_NAME, ITEM_PRICE,ITEM_IMAGE, SUPP_COMPANY,CATEGORY_NAME,SYNCD) VALUES (?,?,?,?,?,?,?);',
+                                [item[i]["itemcode"], item[i]["itemname"], item[i]["itemprice"], item[i]["itemimage"], item[i]["supplierComp"],item[i]["cateName"],item[i]["syncd"]],
+                                null,
+                                errorHandler
+                            );
+                        }
+                    });
+            });
+
+
+        }// end createDB fx
+
 ```
 * What a function do
      - This function is used to create tables which is table category, supplier, and item in Web SQL. It is also used to insert data into those tables.
@@ -179,8 +342,12 @@ function createTablesAndInsert(callback) {
  
  4. Function getAllTablesFromDB()
  ```javascript
-  function getAllTablesFromDB(callback) {
-            //some lines of codes
+   function getAllTablesFromDB(callback) {
+            db.transaction(function(tx) {
+                tx.executeSql('SELECT tbl_name from sqlite_master WHERE type = "table"', [], function(tx, results) {
+                    callback(results, processResultSet);
+                });
+            });
         }
  ```
 * What a function do
