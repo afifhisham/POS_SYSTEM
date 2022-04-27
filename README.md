@@ -108,3 +108,17 @@ function createDbAndTables(callback) {
 * What a function returns
      - This function has no return value.
  
+ 4. Function getAllTablesFromDB()
+ ```javascript
+  function getAllTablesFromDB(callback) {
+            //some lines of codes
+        }
+ ```
+* What a function do
+     - This function is used to select tables name from built-in Web SQL table which is **sqlite_master** table and call another function to display all data inserted into the table in HTML table
+     
+* What the function's parameters or arguments are
+     - This function has callback as the parameter (function that is passed as an argument to another function, to be “called back” at a later time.)
+     
+* What a function returns
+     - This function has no return value.
