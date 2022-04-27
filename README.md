@@ -13,8 +13,9 @@ To access this project, the software programs need to be installed:
 Fistly, you need to create the database and tables in PhpMyAdmin, then insert the data into the tables. Below is the steps to create the database in PHPMyAdmin:
 
 1. Open PHPMyAdmin (http://localhost/phpmyadmin)
-2. Create a database with name kedairuncitsl
+2. ```Create a database with name kedairuncitsl```
      ![](gitImg/createDB.png)
+     
 3. Create tables with table name **category**, **supplier**, and **item**.
      * Table: category
      
@@ -27,3 +28,28 @@ Fistly, you need to create the database and tables in PhpMyAdmin, then insert th
      * Table: item
      
      ![](gitImg/2022-04-27%20(4).png)
+     
+
+### Example/ Tutorial
+* Create a PHP file named connection.php. This file use to connect the database.
+
+```php
+<?php
+define("HOST", "localhost");     // The host you want to connect to.
+define("USER", "root");    // The database username.
+define("PASSWORD","");    // The database password.
+define("DATABASE", "kedairuncitsl");    // The database name.
+define("PASSWORD_KEY", "SMARTLAB");
+define("QUOTES_GPC", (ini_get('magic_quotes_gpc') ? TRUE : FALSE));
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
+try {
+    $dbx = new PDO('mysql:host='.HOST.';dbname='.DATABASE, USER, PASSWORD);
+    $dbx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbx->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+?>
+```
