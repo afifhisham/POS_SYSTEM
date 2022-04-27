@@ -628,7 +628,7 @@ function getResult(results, callback) {
      - This function has no return value.
 
 15) Function processResult(tblname,results)
-```javasript	 
+```javascript	 
 function processResult(tblname,results) {
             if(tblname=="category"){
                 var i = category.length - 1;
@@ -670,7 +670,7 @@ function processResult(tblname,results) {
 	
 16) HTML 
 ```html
-	</head>
+</head>
 
 <body onload="runFunction()">
 
@@ -681,7 +681,5 @@ function processResult(tblname,results) {
 </body>
 </html>
 ```
-* <body onload="runFunction()"> is used to call the Javascript function named runFunction()
-* <div id="latestDate" name="latestDate"><h1>Latest Datetime from PhpMyAdmin:</h1></div>
-  <div id="lastDate" name="lastDate"><h1>Latest Datetime from Web SQL:</h1></div>
-  - These two <div> HTML tag is used for the Javascript function to display the data in HTML page.
+* The onload in <body> tag is used to call the Javascript function named runFunction()
+* Both <div> HTML tag is used for the Javascript function to display the data in HTML page.
