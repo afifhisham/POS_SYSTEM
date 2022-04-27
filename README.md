@@ -13,3 +13,5 @@ To access this project, the software programs need to be installed:
 Fistly, you need to create the database and tables in PhpMyAdmin, then insert the data into the tables. Below is the steps to create the database in PHPMyAdmin:
 
 1. Open PHPMyAdmin (http://localhost/phpmyadmin)
+2. Create a database with name kedairuncitsl
+     ![](createDB.png)
