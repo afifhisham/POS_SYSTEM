@@ -55,4 +55,4 @@ try {
 ```
 
 ### Issue tracker for others
-
+     https://github.com/nurulshafiqa/POS_SYSTEM/issues
