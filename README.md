@@ -684,7 +684,8 @@ function processResult(tblname,results) {
 
 ### Screenshots
 * This is how it looks on HTML page
- 	![](gitImg/latest.png )
+ 	![](gitImg/category.png )
+	![](gitImg/item.png )
 ### How to Use?
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
