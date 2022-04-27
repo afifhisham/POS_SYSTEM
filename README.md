@@ -674,16 +674,14 @@ function processResult(tblname,results) {
 
 <body onload="runFunction()">
 
-<div id="latestDate" name="latestDate"><h1>Latest Datetime from PhpMyAdmin:</h1></div>
-<br><br>
 <div id="lastDate" name="lastDate"><h1>Latest Datetime from Web SQL:</h1></div>
 <br><br>
 </body>
 </html>
 ```
 * The onload in body tag is used to call the Javascript function named runFunction()
-* Both div HTML tag is used for the Javascript function to display the data in HTML page.
-```
+* The div HTML tag is used for the Javascript function to display the data in HTML page.
+
 ### Screenshots
 
 ### Issue tracker for others
