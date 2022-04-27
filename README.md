@@ -5,6 +5,8 @@
 
 This project is aiming to create a database in Web SQL for POS System. It is including the tables creation, data insertion, and retrieve the value from tables stored in Web SQL. In this project, the data that have been inserted into tables in Web SQL is the exported data from SQL file of the database in PhpMyAdmin. Another purpose of this project is to compare the last entered data into table based on the datetime in Web SQL. 
 
+### Build Status
+
 ### Installation
 To access this project, the software programs need to be installed:
 * XAMPP Installer
@@ -32,8 +34,9 @@ Fistly, you need to create the database and tables in PhpMyAdmin, then insert th
      
      ![](gitImg/2022-04-27%20(4).png)
      
+### Code Style
 
-### Example/ Tutorial
+### Code Example
 * Create a PHP file named connection.php. This file use to connect the database.
 
 ```php
@@ -56,9 +59,6 @@ try {
 }
 ?>
 ```
-
-### Issue tracker for others
-     https://github.com/nurulshafiqa/POS_SYSTEM/issues
      
 ### Code documentation
 1) Require_once("connection.php)
@@ -67,7 +67,7 @@ try {
 require_once("connection.php");
 ?>
 ```
-* This code is used to require the PHP file where the code of database connection as shown in **Example/ Tutorial** section is saved. This code allowed the other PHP file to use the same database connection.
+* This code is used to require the PHP file where the code of database connection as shown in **Code Example** section is saved. This code allowed the other PHP file to use the same database connection.
 
 2) HTML
 ```html
@@ -683,3 +683,14 @@ function processResult(tblname,results) {
 ```
 * The onload in body tag is used to call the Javascript function named runFunction()
 * Both div HTML tag is used for the Javascript function to display the data in HTML page.
+```
+### Screenshots
+
+### Issue tracker for others
+     https://github.com/nurulshafiqa/POS_SYSTEM/issues
+     
+### Tech/Framework used
+### How to Use?
+### Contribute
+### Credits
+### License
