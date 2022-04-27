@@ -683,7 +683,8 @@ function processResult(tblname,results) {
 * The div HTML tag is used for the Javascript function to display the data in HTML page.
 
 ### Screenshots
-
+* This is how it looks on HTML page
+ 	![](gitImg/latest.png )
 ### How to Use?
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
