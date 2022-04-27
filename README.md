@@ -681,5 +681,5 @@ function processResult(tblname,results) {
 </body>
 </html>
 ```
-* The onload in <body> tag is used to call the Javascript function named runFunction()
-* Both <div> HTML tag is used for the Javascript function to display the data in HTML page.
+* The onload in body tag is used to call the Javascript function named runFunction()
+* Both div HTML tag is used for the Javascript function to display the data in HTML page.
