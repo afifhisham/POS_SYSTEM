@@ -684,8 +684,29 @@ function processResult(tblname,results) {
 
 ### Screenshots
 * This is how it looks on HTML page
- 	![](gitImg/category.png )
+	- Table category
+ 	![](category.png )
+	- Table supplier
+	![](supp.png)
+	- Table item
 	![](gitImg/item.png )
+
+* This is how Web SQL looks like:
+	- Web SQL database
+
+
+	- Table category
+	![](gitImg/cat.png )
+	
+	- Table supplier
+	![](gitImg/suppdb.png )
+	
+	- Table item
+	![](gitImg/itemdb.png )
+	
+	- Last date console
+
+	
 ### How to Use?
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
