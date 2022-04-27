@@ -8,7 +8,10 @@ This project is aiming to create a database in Web SQL for POS System. It is inc
 ### Installation
 To access this project, the software programs need to be installed:
 * XAMPP Installer
-* Any IDE; in this project, Microsoft Visual Studio Code or PhpStorm is used.
+	- https://www.apachefriends.org/download.html
+* Any IDE; in this project, Visual Studio Code or PhpStorm is used.
+	- Visual Studio Code: https://code.visualstudio.com/docs/?dv=win 
+	- PhpStorm: https://www.jetbrains.com/phpstorm/download/#section=windows
 
 Fistly, you need to create the database and tables in PhpMyAdmin, then insert the data into the tables. Below is the steps to create the database in PHPMyAdmin:
 
@@ -349,10 +352,336 @@ function createTablesAndInsert(callback) {
         }
  ```
 * What a function do
-     - This function is used to select tables name from built-in Web SQL table which is **sqlite_master** table and call another function to display all data inserted into the table in HTML table
+     - This function is used to select tables name from built-in Web SQL table which is **sqlite_master** table and call another function which is processResultSet function to display all data inserted into the table in HTML table
      
 * What the function's parameters or arguments are
      - This function has callback as the parameter (function that is passed as an argument to another function, to be “called back” at a later time.)
      
 * What a function returns
      - This function has no return value.
+
+11) Function getResultSetFromTable(results, callback)     
+```javascript
+   function getResultSetFromTable(results, callback) {
+            var length = results.rows.length;
+            var j = 0;
+            for (var i = 0; i < length; i++) {
+                db.transaction(function(tx) {
+                    var k=0,tblname=results.rows[j++].tbl_name;
+                    tx.executeSql('SELECT * FROM ' + tblname , [], function(tx, results) {
+                        callback(tblname,results);
+                    });
+                });
+            }
+
+        }
+```
+* What a function do
+     - This function is used to get how many tables are stored by (var length = results.rows.length;), then perform SELECT SQL queries to select all data from table name.
+     
+* What the function's parameters or arguments are
+     - This function has callback as the parameter (function that is passed as an argument to another function, to be “called back” at a later time.) and results is also the parameter of this funtion
+     
+* What a function returns
+     - This function has no return value.
+
+12) Fuction processResultSet(tblname,results)
+```javascript
+	  //table
+
+        function processResultSet(tblname,results) {
+            if(tblname=="category"){
+                console.log('----------------------'+tblname)
+                var len = results.rows.length;
+                var tbl = document.createElement('table');
+                var trTblName = document.createElement('tr');
+                var thTblName = document.createElement('th');
+                thTblName.innerHTML = tblname;
+                trTblName.colSpan = 2;
+                trTblName.appendChild(thTblName);
+                tbl.appendChild(trTblName);
+
+                var trHeader = document.createElement('tr');
+                var th1 = document.createElement('th');
+                th1.innerHTML = 'Category Code';
+                var th2 = document.createElement('th');
+                th2.innerHTML = 'Category Name';
+                var th3 = document.createElement('th');
+                th3.innerHTML = 'Description';
+                // var th4 = document.createElement('th');
+                // th4.innerHTML = 'SYNCD';
+                trHeader.appendChild(th1);
+                trHeader.appendChild(th2);
+                trHeader.appendChild(th3);
+                //trHeader.appendChild(th4);
+                tbl.appendChild(trHeader);
+
+                for (var i = 0; i < category.length; i++) {
+                    var tr = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    td1.innerHTML = results.rows[i].CAT_CODE;
+                    var td2 = document.createElement('td');
+                    td2.innerHTML = results.rows[i].CAT_NAME;
+                    var td3 = document.createElement('td');
+                    td3.innerHTML = results.rows[i].CAT_DESC;
+                    // var td4 = document.createElement('td');
+                    // td4.innerHTML = results.rows[i].SYNCD;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    //tr.appendChild(td4);
+                    tbl.appendChild(tr);
+                }
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(tbl);
+                body.appendChild(document.createElement('br'));
+                body.appendChild(document.createElement('br'));
+                //body.appendChild(document.createElement('hr'));
+
+
+            }
+            else if(tblname=="item"){
+                console.log('----------------------'+tblname)
+                var len = results.rows.length;
+                var tbl = document.createElement('table');
+                var trTblName = document.createElement('tr');
+                var thTblName = document.createElement('th');
+                thTblName.innerHTML = tblname;
+                trTblName.colSpan = 2;
+                trTblName.appendChild(thTblName);
+                tbl.appendChild(trTblName);
+
+                var trHeader = document.createElement('tr');
+                var th1 = document.createElement('th');
+                th1.innerHTML = 'Item Code';
+                var th2 = document.createElement('th');
+                th2.innerHTML = 'Item Name';
+                var th3 = document.createElement('th');
+                th3.innerHTML = 'Item Price';
+                var th4 = document.createElement('th');
+                th4.innerHTML = 'Item Image';
+                var th5 = document.createElement('th');
+                th5.innerHTML = 'Supplier Company';
+                var th6 = document.createElement('th');
+                th6.innerHTML = 'Category Name';
+                // var th7 = document.createElement('th');
+                // th7.innerHTML = 'SYNCD';
+                trHeader.appendChild(th1);
+                trHeader.appendChild(th2);
+                trHeader.appendChild(th3);
+                trHeader.appendChild(th4);
+                trHeader.appendChild(th5);
+                trHeader.appendChild(th6);
+                //trHeader.appendChild(th7);
+                tbl.appendChild(trHeader);
+
+                for (var i = 0; i < item.length; i++) {
+                    var tr = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    td1.innerHTML = results.rows[i].ITEM_CODE;
+                    var td2 = document.createElement('td');
+                    td2.innerHTML = results.rows[i].ITEM_NAME;
+                    var td3 = document.createElement('td');
+                    td3.innerHTML = results.rows[i].ITEM_PRICE;
+                    var td4 = document.createElement('td');
+                    td4.innerHTML = results.rows[i].ITEM_IMAGE;
+                    var td5 = document.createElement('td');
+                    td5.innerHTML = results.rows[i].SUPP_COMPANY;
+                    var td6 = document.createElement('td');
+                    td6.innerHTML = results.rows[i].CATEGORY_NAME;
+                    // var td7 = document.createElement('td');
+                    // td7.innerHTML = results.rows[i].SYNCD;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    tr.appendChild(td5);
+                    tr.appendChild(td6);
+                    //tr.appendChild(td7);
+                    tbl.appendChild(tr);
+                }
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(tbl);
+                body.appendChild(document.createElement('br'));
+                //body.appendChild(document.createElement('hr'));
+            }
+            else{
+                console.log('----------------------'+tblname)
+                var len = results.rows.length;
+                var tbl = document.createElement('table');
+                var trTblName = document.createElement('tr');
+                var thTblName = document.createElement('th');
+                thTblName.innerHTML = tblname;
+                trTblName.colSpan = 2;
+                trTblName.appendChild(thTblName);
+                tbl.appendChild(trTblName);
+
+                var trHeader = document.createElement('tr');
+                var th1 = document.createElement('th');
+                th1.innerHTML = 'Supplier Email';
+                var th2 = document.createElement('th');
+                th2.innerHTML = 'Supplier Name';
+                var th3 = document.createElement('th');
+                th3.innerHTML = 'Supplier Address';
+                var th4 = document.createElement('th');
+                th4.innerHTML = 'Company Name';
+                var th5 = document.createElement('th');
+                th5.innerHTML = 'Phone Number';
+                var th6 = document.createElement('th');
+                th6.innerHTML = 'Contact Person';
+                // var th7 = document.createElement('th');
+                // th7.innerHTML = 'SYNCD';
+                trHeader.appendChild(th1);
+                trHeader.appendChild(th2);
+                trHeader.appendChild(th3);
+                trHeader.appendChild(th4);
+                trHeader.appendChild(th5);
+                trHeader.appendChild(th6);
+               // trHeader.appendChild(th7);
+                tbl.appendChild(trHeader);
+
+                for (var i = 0; i < supplier.length; i++) {
+                    var tr = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    td1.innerHTML = results.rows[i].SUPP_EMAIL;
+                    var td2 = document.createElement('td');
+                    td2.innerHTML = results.rows[i].SUPP_NAME;
+                    var td3 = document.createElement('td');
+                    td3.innerHTML = results.rows[i].SUPP_ADDRESS;
+                    var td4 = document.createElement('td');
+                    td4.innerHTML = results.rows[i].SUPP_COMPANY;
+                    var td5 = document.createElement('td');
+                    td5.innerHTML = results.rows[i].SUPP_PHONE;
+                    var td6 = document.createElement('td');
+                    td6.innerHTML = results.rows[i].SUPP_CONTACT;
+                    // var td7 = document.createElement('td');
+                    // td7.innerHTML = results.rows[i].SYNCD;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    tr.appendChild(td5);
+                    tr.appendChild(td6);
+                    //tr.appendChild(td7);
+                    tbl.appendChild(tr);
+                }
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(tbl);
+                body.appendChild(document.createElement('br'));
+                body.appendChild(document.createElement('br'));
+                //body.appendChild(document.createElement('hr'));
+            }
+
+        }
+```
+* What a function do
+     - This function is used to display the data from the table name in the HTML table
+     
+* What the function's parameters or arguments are
+     - tblname and results are the parameters for this function
+     
+* What a function returns
+     - This function has no return value.
+
+13) Function getAllTables(callback)
+```javascript
+function getAllTables(callback) {
+            db.transaction(function(tx) {
+                tx.executeSql('SELECT tbl_name from sqlite_master WHERE type = "table" ', [], function(tx, results) {
+                     callback(results, processResult);
+                });
+            });
+        }
+```
+* What a function do
+     - This function is used to select tables name from built-in Web SQL table which is **sqlite_master** table and call another function which is processResult function to get the last date of record that has been added into the SQL tables.
+     
+* What the function's parameters or arguments are
+     - This function has callback as the parameter (function that is passed as an argument to another function, to be “called back” at a later time.)
+     
+* What a function returns
+     - This function has no return value. 
+										  
+14) function getResult(results, callback)
+```javascript
+function getResult(results, callback) {
+            var length = results.rows.length;
+            var j = 0;
+            for (var i = 0; i < length; i++) {
+                db.transaction(function(tx) {
+                    var k=0,tblname=results.rows[j++].tbl_name;
+                    tx.executeSql('SELECT SYNCD FROM ' + tblname  , [], function(tx, results) {
+                        callback(tblname,results);
+                    });
+                });
+            }
+
+        }
+```
+* What a function do
+     - This function is used to get how many tables are stored by (var length = results.rows.length;), then perform SELECT SQL queries to select column name which is column SYNCD that stores the datetime of records from all table name.
+     
+* What the function's parameters or arguments are
+     - This function has callback as the parameter (function that is passed as an argument to another function, to be “called back” at a later time.) and results is also the parameter of this funtion
+     
+* What a function returns
+     - This function has no return value.
+
+15) Function processResult(tblname,results)
+```javasript	 
+function processResult(tblname,results) {
+            if(tblname=="category"){
+                var i = category.length - 1;
+                catDate = results.rows[i].SYNCD;
+                console.log("Last category date:" + catDate);
+                var lastCat = "<p> Last category date: " +catDate+ "</p>";
+                document.querySelector('#lastDate').innerHTML += lastCat;
+                return catDate;
+
+
+            }
+            else if(tblname=="item"){
+                var i = item.length - 1;
+                itemDate = results.rows[i].SYNCD;
+                console.log("Last item date:" + itemDate);
+                var lastItem = "<p> Last item date: " +itemDate+ "</p>";
+                document.querySelector('#lastDate').innerHTML += lastItem;
+                return itemDate;
+            }
+            else{
+                var i = supplier.length - 1;
+                supplierDate = results.rows[i].SYNCD;
+                console.log("Last supplier date:" + supplierDate);
+                var lastSupp = "<p> Last supplier date: " +supplierDate+ "</p>";
+                document.querySelector('#lastDate').innerHTML += lastSupp;
+                return supplierDate;
+
+        }}
+    </script>
+```
+* What a function do
+     - This function is used to check the table name, if yes then it will get the last record of all tables based on SYNCD.
+     
+* What the function's parameters or arguments are
+     - tblname and results are the parameters for this function
+     
+* What a function returns
+     - This function has no return value.
+	
+16) HTML 
+```html
+	</head>
+
+<body onload="runFunction()">
+
+<div id="latestDate" name="latestDate"><h1>Latest Datetime from PhpMyAdmin:</h1></div>
+<br><br>
+<div id="lastDate" name="lastDate"><h1>Latest Datetime from Web SQL:</h1></div>
+<br><br>
+</body>
+</html>
+```
+* <body onload="runFunction()"> is used to call the Javascript function named runFunction()
+* <div id="latestDate" name="latestDate"><h1>Latest Datetime from PhpMyAdmin:</h1></div>
+  <div id="lastDate" name="lastDate"><h1>Latest Datetime from Web SQL:</h1></div>
+  - These two <div> HTML tag is used for the Javascript function to display the data in HTML page.
