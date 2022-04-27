@@ -14,4 +14,4 @@ Fistly, you need to create the database and tables in PhpMyAdmin, then insert th
 
 1. Open PHPMyAdmin (http://localhost/phpmyadmin)
 2. Create a database with name kedairuncitsl
-     ![](createDB.png)
+     ![](gitImg/createDB.png)
