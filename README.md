@@ -173,7 +173,6 @@ require_once("connection.php");
             ?>
         ];
 
-
         //fetch from column in table item and put as array
         var item = [
             <?php
@@ -195,7 +194,6 @@ require_once("connection.php");
             }
             ?>
         ];
-
         //fetch from column in table supplier and put as array
         var supplier = [
             <?php
@@ -217,7 +215,6 @@ require_once("connection.php");
             }
             ?>
         ];
-      
       ```
 * This code is used to get all data stored in columns of the tables from PHPMyAdmin database and make it as arrays.     
 
@@ -229,8 +226,8 @@ require_once("connection.php");
         var version='0.1';
         var displayName='POSMart';
         var maxSize = 65536;
-        db = openDatabase(shortName,version,displayName,maxSize);  
-```
+        db = openDatabase(shortName,version,displayName,maxSize);
+      ```
 * This code is used to create a Web SQL database      
       
       
