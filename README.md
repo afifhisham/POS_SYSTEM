@@ -74,6 +74,7 @@ try {
 * What a function returns
      - This function will return boolean true if there's an error.
 
+
 2) Function runExample()
 
 ```javascript
@@ -91,6 +92,7 @@ function runExample() {
      
 * What a function returns
      - This function has no return value.
+ 
  
 3. Function createDbAndTables(callback)
 
@@ -168,8 +170,7 @@ function createDbAndTables(callback) {
 
 
         }// end createDB fx
-        ```
-
+```
 * What a function do
      - This function is used to create tables which is table category, supplier, and item in Web SQL. It is also used to insert data into those tables.
      
