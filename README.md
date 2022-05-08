@@ -753,9 +753,6 @@ function processResult(tblname,results) {
 	![](gitImg/csl.png )
 
 	
-### How to Use?
 ### Issue tracker for others
      https://github.com/nurulshafiqa/POS_SYSTEM/issues
-### Contribute
-### Credits
-### License
+
